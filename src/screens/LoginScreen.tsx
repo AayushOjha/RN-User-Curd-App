@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {View, StyleSheet, Image, Dimensions, Text, Alert} from 'react-native';
-import {Button, useTheme} from 'react-native-paper';
+import {View, StyleSheet, Image, Dimensions} from 'react-native';
+import {Button, useTheme, Text} from 'react-native-paper';
 import {useFormik} from 'formik';
 import {AppContainer} from '../components/AppContainer';
 import {TextInput} from '../components/Form/TextInput';
@@ -84,7 +84,7 @@ const LoginScreen = ({navigation}: LoginScreenProps) => {
           <Text>Don't have a account?</Text>
           <Text
             onPress={() => {
-              navigation.navigate('SignUp');
+              navigation.navigate('signup');
             }}
             style={styles.signUpText}>
             create a new account.

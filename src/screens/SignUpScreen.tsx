@@ -1,11 +1,12 @@
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
 import {AppContainer} from '../components/AppContainer';
-import {Button, useTheme} from 'react-native-paper';
+import {Button, useTheme, Text} from 'react-native-paper';
 import {TextInput} from '../components/Form/TextInput';
 import {useFormik} from 'formik';
 import {IScreenBaseProps} from '../services/interfaces/common';
 import RadioInput from '../components/Form/RadioInput';
+// import RadioInput from '../components/Form/RadioInput';
 
 interface SignUpScreenProps extends IScreenBaseProps {}
 
@@ -98,7 +99,7 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
           <Text>Already have a account?</Text>
           <Text
             onPress={() => {
-              navigation.navigate('LogIn');
+              navigation.navigate('login');
             }}
             style={styles.loginText}>
             Login

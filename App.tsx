@@ -23,16 +23,16 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="login">
           <Stack.Screen
-            name="LogIn"
+            name="login"
             options={{
               header: () => <ScreenHeader title="Login" disableMenu />,
             }}
             component={LoginScreen}
           />
           <Stack.Screen
-            name="SignUp"
+            name="signup"
             options={{
               header: () => <ScreenHeader title="Sign up" disableMenu />,
             }}
