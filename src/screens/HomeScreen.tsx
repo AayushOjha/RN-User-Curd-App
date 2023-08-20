@@ -7,6 +7,9 @@ import {UserList} from '../utils/constants';
 import {userList} from '../services/interfaces/common';
 import {AppContainer} from '../components/AppContainer';
 import {isEmpty} from 'lodash';
+import {FlatList} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {UserOverviewCard} from '../components/UserOverviewCard.tsx';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'home'>;
 
@@ -19,15 +22,34 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
   const styles = StyleSheet.create({
     noDataImage: {
       width: '100%',
-      height: 300,
-      // height: Math.max(windowHeight * 0.3, 300),
+      height: Math.max(windowHeight * 0.3, 300),
+    },
+    container: {
+      backgroundColor: '#fff',
+      flex: 1,
+      // paddingTop: 30,
+    },
+    listContainer: {
+      padding: 10,
+      paddingBottom: 20,
+    },
+    listSeparator: {
+      marginTop: 10,
     },
   });
 
   return (
-    <AppContainer>
+    <View style={styles.container}>
       {!isEmpty(usersData.users) ? (
-        <></>
+        <SafeAreaView>
+          <FlatList
+            contentContainerStyle={styles.listContainer}
+            data={usersData.users}
+            ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
+            renderItem={({item}) => <UserOverviewCard {...item} />}
+            keyExtractor={item => item.phone}
+          />
+        </SafeAreaView>
       ) : (
         <>
           <Image
@@ -37,7 +59,7 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
           <Text variant="titleMedium">No User found, Please add one.</Text>
         </>
       )}
-    </AppContainer>
+    </View>
   );
 };
 

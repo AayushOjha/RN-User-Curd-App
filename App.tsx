@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -7,6 +8,7 @@ import {SignUpScreen} from './src/screens/SignUpScreen';
 import {THEME_COLOR} from './src/utils/ThemeConstant';
 import {ScreenHeader} from './src/components/Header/ScreenHeader';
 import HomeScreen from './src/screens/HomeScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 export type RootStackParamList = {
   login: undefined;
@@ -28,32 +30,34 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="home">
-          <Stack.Screen
-            name="login"
-            options={{
-              header: () => <ScreenHeader title="Login" disableMenu />,
-            }}
-            component={LoginScreen}
-          />
-          <Stack.Screen
-            name="signup"
-            options={{
-              header: () => <ScreenHeader title="Sign up" disableMenu />,
-            }}
-            component={SignUpScreen}
-          />
-          <Stack.Screen
-            name="home"
-            options={{
-              header: () => <ScreenHeader title="Home" />,
-            }}
-            component={HomeScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="home">
+            <Stack.Screen
+              name="login"
+              options={{
+                header: () => <ScreenHeader title="Login" disableMenu />,
+              }}
+              component={LoginScreen}
+            />
+            <Stack.Screen
+              name="signup"
+              options={{
+                header: () => <ScreenHeader title="Sign up" disableMenu />,
+              }}
+              component={SignUpScreen}
+            />
+            <Stack.Screen
+              name="home"
+              options={{
+                header: () => <ScreenHeader title="Home" />,
+              }}
+              component={HomeScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
