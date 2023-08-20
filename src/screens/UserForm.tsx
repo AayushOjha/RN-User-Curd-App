@@ -39,6 +39,23 @@ const UserForm = ({navigation, route}: UserFormProps) => {
       gap: 20,
       marginTop: 20,
     },
+    buttonContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: 20,
+      width: '100%',
+    },
+    cancelButton: {
+      borderRadius: 5,
+      flex: 1,
+    },
+    saveButton: {
+      borderRadius: 5,
+      flex: 1,
+      backgroundColor: theme.colors.primary,
+    },
   });
 
   return (
@@ -108,16 +125,28 @@ const UserForm = ({navigation, route}: UserFormProps) => {
           placeholder="State"
         />
 
-        <Button
-          mode="contained"
-          buttonColor={theme.colors.primary}
-          onPress={() => {
-            formik.handleSubmit();
-          }}
-          labelStyle={{fontSize: 20}}
-          contentStyle={{padding: 3}}>
-          Submit
-        </Button>
+        <View style={styles.buttonContainer}>
+          <Button
+            mode="outlined"
+            style={styles.cancelButton}
+            onPress={() => {
+              navigation.pop();
+            }}
+            labelStyle={{fontSize: 20}}
+            contentStyle={{padding: 3}}>
+            Cancel
+          </Button>
+          <Button
+            mode="contained"
+            style={styles.saveButton}
+            onPress={() => {
+              formik.handleSubmit();
+            }}
+            labelStyle={{fontSize: 20}}
+            contentStyle={{padding: 3}}>
+            Save
+          </Button>
+        </View>
       </View>
     </AppContainer>
   );
