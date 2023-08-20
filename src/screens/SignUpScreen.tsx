@@ -4,7 +4,7 @@ import {AppContainer} from '../components/AppContainer';
 import {Button, useTheme, Text} from 'react-native-paper';
 import {TextInput} from '../components/Form/TextInput';
 import {useFormik} from 'formik';
-import {IScreenBaseProps} from '../services/interfaces/common';
+
 import {RadioInput} from '../components/Form/RadioInput';
 import {
   CitiesOptions,
@@ -14,8 +14,10 @@ import {
 } from '../utils/constants';
 import {CheckBoxInput} from '../components/Form/CheclBoxInput';
 import {StaticSelector} from '../components/Form/StaticSelector';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../App';
 
-interface SignUpScreenProps extends IScreenBaseProps {}
+type SignUpScreenProps = NativeStackScreenProps<RootStackParamList, 'signup'>;
 
 const SignUpScreen = ({navigation}: SignUpScreenProps) => {
   const formik = useFormik({

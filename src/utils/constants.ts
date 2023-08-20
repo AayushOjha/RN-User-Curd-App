@@ -1,4 +1,4 @@
-import {IOprionsObject} from '../services/interfaces/common';
+import {IOprionsObject, userList} from '../services/interfaces/common';
 
 export const GenderOptions: IOprionsObject[] = [
   {value: 'male', label: 'Male'},
@@ -22,3 +22,8 @@ export const LeadSourceOptions = {
 export const CitiesOptions = ['Mumbai', 'Pune', 'Ahmedabad'];
 
 export const StateOptions = ['Gujarat', 'Maharashtra', 'Karnataka'];
+
+// Mocking the data
+export const UserList: userList = {
+  users: [],
+};

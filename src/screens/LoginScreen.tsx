@@ -4,9 +4,10 @@ import {Button, useTheme, Text} from 'react-native-paper';
 import {useFormik} from 'formik';
 import {AppContainer} from '../components/AppContainer';
 import {TextInput} from '../components/Form/TextInput';
-import {IScreenBaseProps} from '../services/interfaces/common';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../App';
 
-interface LoginScreenProps extends IScreenBaseProps {}
+type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'login'>;
 
 const LoginScreen = ({navigation}: LoginScreenProps) => {
   const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
