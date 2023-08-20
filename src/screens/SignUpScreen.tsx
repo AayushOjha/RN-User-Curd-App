@@ -5,8 +5,9 @@ import {Button, useTheme, Text} from 'react-native-paper';
 import {TextInput} from '../components/Form/TextInput';
 import {useFormik} from 'formik';
 import {IScreenBaseProps} from '../services/interfaces/common';
-import RadioInput from '../components/Form/RadioInput';
-import {GenderOptions} from '../utils/constants';
+import {RadioInput} from '../components/Form/RadioInput';
+import {GenderOptions, LeadSourceOptions} from '../utils/constants';
+import {CheckBoxInput} from '../components/Form/CheclBoxInput';
 // import RadioInput from '../components/Form/RadioInput';
 
 interface SignUpScreenProps extends IScreenBaseProps {}
@@ -18,6 +19,7 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
       email: undefined,
       phone: undefined,
       gender: 'male',
+      leadSource: LeadSourceOptions,
       password: undefined,
     },
     onSubmit: values => {
@@ -26,7 +28,7 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
   });
 
   // Styles
-  const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
+  // const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   const theme = useTheme();
   const styles = StyleSheet.create({
     form: {
@@ -90,9 +92,21 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
         />
 
         <RadioInput
+          fieldLabel="Select Gender"
           options={GenderOptions}
           onChange={formik.handleChange('gender')}
           currentValue={formik.values.gender}
+        />
+
+        <CheckBoxInput
+          fieldLabel="How did you hear about this? "
+          onChange={(key, value) => {
+            formik.setFieldValue('leadSource', {
+              ...formik.values.leadSource,
+              [key]: value,
+            });
+          }}
+          currentValue={formik.values.leadSource}
         />
 
         <Button
