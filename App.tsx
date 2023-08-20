@@ -9,11 +9,16 @@ import {THEME_COLOR} from './src/utils/ThemeConstant';
 import {ScreenHeader} from './src/components/Header/ScreenHeader';
 import HomeScreen from './src/screens/HomeScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {IUserListItem} from './src/services/interfaces/common';
+import {UserForm} from './src/screens/UserForm';
 
 export type RootStackParamList = {
   login: undefined;
   signup: undefined;
   home: undefined;
+  userForm: {
+    user?: IUserListItem;
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -33,7 +38,7 @@ export default function App() {
     <GestureHandlerRootView style={{flex: 1}}>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="home">
+          <Stack.Navigator initialRouteName="userForm">
             <Stack.Screen
               name="login"
               options={{
@@ -54,6 +59,13 @@ export default function App() {
                 header: () => <ScreenHeader title="Home" />,
               }}
               component={HomeScreen}
+            />
+            <Stack.Screen
+              name="userForm"
+              options={{
+                header: () => <ScreenHeader title="Home" />,
+              }}
+              component={UserForm}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -1,4 +1,4 @@
-import {IOprionsObject, userList} from '../services/interfaces/common';
+import {IOprionsObject, IUserList} from '../services/interfaces/common';
 
 export const GenderOptions: IOprionsObject[] = [
   {value: 'male', label: 'Male'},
@@ -24,7 +24,7 @@ export const CitiesOptions = ['Mumbai', 'Pune', 'Ahmedabad'];
 export const StateOptions = ['Gujarat', 'Maharashtra', 'Karnataka'];
 
 // Mocking the data
-export const UserList: userList = {
+export const UserList: IUserList = {
   users: [
     {name: 'Ayush Ojha', email: 'ayush@gmail.com', phone: '123202903920'},
     {name: 'Mangal Pande', email: 'mp@gmail.com', phone: '123202903930'},

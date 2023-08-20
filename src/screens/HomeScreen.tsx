@@ -1,11 +1,10 @@
-import {Dimensions, Image, StyleSheet, View} from 'react-native';
+import {Animated, Dimensions, Image, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
-import {Text, useTheme} from 'react-native-paper';
+import {FAB, Text, useTheme} from 'react-native-paper';
 import {UserList} from '../utils/constants';
-import {userList} from '../services/interfaces/common';
-import {AppContainer} from '../components/AppContainer';
+import {IUserList} from '../services/interfaces/common';
 import {isEmpty} from 'lodash';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -14,7 +13,7 @@ import {UserOverviewCard} from '../components/UserOverviewCard.tsx';
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'home'>;
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
-  const [usersData, srtUsersData] = useState<userList>(UserList);
+  const [usersData, srtUsersData] = useState<IUserList>(UserList);
 
   // styling
   const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
@@ -27,7 +26,6 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     container: {
       backgroundColor: '#fff',
       flex: 1,
-      // paddingTop: 30,
     },
     listContainer: {
       padding: 10,
@@ -35,6 +33,13 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     },
     listSeparator: {
       marginTop: 10,
+    },
+    fab: {
+      backgroundColor: theme.colors.primary,
+      color: '#fff',
+      position: 'absolute',
+      bottom: 40,
+      right: 25,
     },
   });
 
@@ -48,6 +53,12 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
             ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
             renderItem={({item}) => <UserOverviewCard {...item} />}
             keyExtractor={item => item.phone}
+          />
+          <FAB
+            icon="plus"
+            color="#fff"
+            style={styles.fab}
+            onPress={() => console.log('Pressed')}
           />
         </SafeAreaView>
       ) : (
