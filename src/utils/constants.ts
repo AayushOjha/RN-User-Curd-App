@@ -20,3 +20,5 @@ export const LeadSourceOptions = {
 // ];
 
 export const CitiesOptions = ['Mumbai', 'Pune', 'Ahmedabad'];
+
+export const StateOptions = ['Gujarat', 'Maharashtra', 'Karnataka'];

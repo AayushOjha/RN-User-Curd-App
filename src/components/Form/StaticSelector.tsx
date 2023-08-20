@@ -8,12 +8,14 @@ interface StaticSelectorProps {
   fieldLabel: string;
   options: string[];
   isSearchable?: boolean;
+  onchange: (value: string) => void;
 }
 
 const StaticSelector = ({
   options,
   fieldLabel,
   isSearchable,
+  onchange,
 }: StaticSelectorProps) => {
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -38,22 +40,14 @@ const StaticSelector = ({
       <SelectDropdown
         search={isSearchable || undefined}
         data={options}
-        onSelect={(selectedItem, index) => {
-          console.log(selectedItem, index);
+        onSelect={selectedItem => {
+          onchange(selectedItem);
         }}
         searchPlaceHolder="Type here..."
         defaultButtonText={fieldLabel}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          // text represented after item is selected
-          // if data array is an array of objects then return selectedItem.property to render after item is selected
-          return selectedItem;
-        }}
+        buttonTextAfterSelection={selectedItem => selectedItem}
         buttonStyle={styles.InputBox}
-        rowTextForSelection={(item, index) => {
-          // text represented for each item in dropdown
-          // if data array is an array of objects then return item.property to represent item in dropdown
-          return item;
-        }}
+        rowTextForSelection={item => item}
         buttonTextStyle={{
           textAlign: 'left',
           fontSize: 16,

@@ -10,6 +10,7 @@ import {
   CitiesOptions,
   GenderOptions,
   LeadSourceOptions,
+  StateOptions,
 } from '../utils/constants';
 import {CheckBoxInput} from '../components/Form/CheclBoxInput';
 import {StaticSelector} from '../components/Form/StaticSelector';
@@ -25,6 +26,8 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
       gender: 'male',
       leadSource: LeadSourceOptions,
       password: undefined,
+      city: undefined,
+      state: undefined,
     },
     onSubmit: values => {
       console.log(values);
@@ -100,6 +103,14 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
           fieldLabel="City"
           options={CitiesOptions}
           isSearchable={false}
+          onchange={formik.handleChange('city')}
+        />
+
+        <StaticSelector
+          fieldLabel="State"
+          options={StateOptions}
+          isSearchable
+          onchange={formik.handleChange('state')}
         />
 
         <RadioInput
