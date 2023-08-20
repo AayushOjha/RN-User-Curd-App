@@ -51,14 +51,14 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
             contentContainerStyle={styles.listContainer}
             data={usersData.users}
             ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
-            renderItem={({item}) => <UserOverviewCard {...item} />}
+            renderItem={({item}) => <UserOverviewCard user={{...item}} />}
             keyExtractor={item => item.phone}
           />
           <FAB
             icon="plus"
             color="#fff"
             style={styles.fab}
-            onPress={() => console.log('Pressed')}
+            onPress={() => navigation.navigate('userForm')}
           />
         </SafeAreaView>
       ) : (

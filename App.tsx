@@ -16,9 +16,7 @@ export type RootStackParamList = {
   login: undefined;
   signup: undefined;
   home: undefined;
-  userForm: {
-    user?: IUserListItem;
-  };
+  userForm: IUserListItem | undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -38,7 +36,7 @@ export default function App() {
     <GestureHandlerRootView style={{flex: 1}}>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="userForm">
+          <Stack.Navigator initialRouteName="home">
             <Stack.Screen
               name="login"
               options={{
@@ -63,7 +61,7 @@ export default function App() {
             <Stack.Screen
               name="userForm"
               options={{
-                header: () => <ScreenHeader title="Home" />,
+                header: () => <ScreenHeader title="User" />,
               }}
               component={UserForm}
             />

@@ -9,14 +9,17 @@ import {
   useTheme,
 } from 'react-native-paper';
 import {getInitials} from '../../utils/helperFunctions';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../../App';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {IUserListItem} from '../../services/interfaces/common';
 
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 interface UserOverviewCardProps {
-  name: string;
-  email: string;
-  phone: string;
+  user: IUserListItem;
 }
 
-const UserOverviewCard = ({name, email, phone}: UserOverviewCardProps) => {
+const UserOverviewCard = ({user}: UserOverviewCardProps) => {
   // styling
   // const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   const theme = useTheme();
@@ -43,21 +46,24 @@ const UserOverviewCard = ({name, email, phone}: UserOverviewCardProps) => {
     },
   });
 
+  const navigation = useNavigation<NavigationProps>();
   return (
     <Card style={styles.container}>
       <Card.Content>
         <View style={styles.content}>
-          <Avatar.Text size={40} label={getInitials(name)} />
+          <Avatar.Text size={40} label={getInitials(user.name)} />
           <View style={styles.nameContainer}>
-            <Text variant="titleSmall">{name}</Text>
-            <Text variant="bodySmall">{`${email} | ${phone}`}</Text>
+            <Text variant="titleSmall">{user.name}</Text>
+            <Text variant="bodySmall">{`${user.email} | ${user.phone}`}</Text>
           </View>
           <View style={styles.editButtonContainer}>
             <IconButton
               icon="account-edit"
               mode="outlined"
               size={20}
-              onPress={() => console.log('Pressed')}
+              onPress={() => {
+                navigation.navigate('userForm', user);
+              }}
             />
           </View>
         </View>

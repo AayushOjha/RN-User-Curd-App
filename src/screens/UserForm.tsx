@@ -13,18 +13,20 @@ const UserForm = ({navigation, route}: UserFormProps) => {
   // const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   const theme = useTheme();
   const formik = useFormik({
-    initialValues: {
-      name: undefined,
-      email: undefined,
-      phone: undefined,
-      address: {
-        addressLine1: undefined,
-        addressLine2: undefined,
-        city: undefined,
-        pincode: undefined,
-        state: undefined,
-      },
-    },
+    initialValues: route.params
+      ? route.params
+      : {
+          name: undefined,
+          email: undefined,
+          phone: undefined,
+          address: {
+            addressLine1: undefined,
+            addressLine2: undefined,
+            city: undefined,
+            pinCode: undefined,
+            state: undefined,
+          },
+        },
     onSubmit: values => {
       console.log(values);
     },
@@ -70,7 +72,7 @@ const UserForm = ({navigation, route}: UserFormProps) => {
           fieldName="addressLine1"
           onChange={formik.handleChange('address.addressLine1')}
           handleBlur={formik.handleBlur}
-          value={formik.values.address['addressLine1']}
+          value={formik.values.address?.['addressLine1']}
           placeholder="Address Line 1"
         />
 
@@ -78,7 +80,7 @@ const UserForm = ({navigation, route}: UserFormProps) => {
           fieldName="addressLine2"
           onChange={formik.handleChange('address.addressLine2')}
           handleBlur={formik.handleBlur}
-          value={formik.values.address['addressLine2']}
+          value={formik.values.address?.['addressLine2']}
           placeholder="Address Line 2"
         />
 
@@ -86,23 +88,23 @@ const UserForm = ({navigation, route}: UserFormProps) => {
           fieldName="city"
           onChange={formik.handleChange('address.city')}
           handleBlur={formik.handleBlur}
-          value={formik.values.address['city']}
+          value={formik.values.address?.['city']}
           placeholder="City"
         />
 
         <TextInput
-          fieldName="pincode"
-          onChange={formik.handleChange('address.pincode')}
+          fieldName="pinCode"
+          onChange={formik.handleChange('address.pinCode')}
           handleBlur={formik.handleBlur}
-          value={formik.values.address['pincode']}
-          placeholder="Pincode"
+          value={formik.values.address?.['pinCode'] || undefined}
+          placeholder="pinCode"
         />
 
         <TextInput
           fieldName="state"
           onChange={formik.handleChange('address.state')}
           handleBlur={formik.handleBlur}
-          value={formik.values.address['state']}
+          value={formik.values.address?.['state']}
           placeholder="State"
         />
 
