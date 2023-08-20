@@ -28,7 +28,6 @@ const CheckBoxInput = ({
   currentValue,
   fieldLabel,
 }: CheckBoxInputProps) => {
-  console.log(currentValue);
   return (
     <View>
       <Text variant="titleMedium">{fieldLabel}</Text>

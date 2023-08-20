@@ -1,10 +1,11 @@
 import {View, StyleSheet} from 'react-native';
 import React from 'react';
 import {RadioButton, Text} from 'react-native-paper';
+import {IOprionsObject} from '../../services/interfaces/common';
 
 interface RadioInputProps {
   fieldLabel: string;
-  options: {value: string; label: string}[];
+  options: IOprionsObject[];
   onChange: (value: string) => void;
   currentValue: string;
 }

@@ -23,7 +23,6 @@ const AppContainer = ({children}: AppContainerProps) => {
     },
   });
 
-  // FIXME: handel keyboard avoid view in expo
   return (
     <ScrollView bounces={false} style={styles.container}>
       <View style={styles.contentContainer}>{children}</View>

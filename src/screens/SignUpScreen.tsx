@@ -6,9 +6,13 @@ import {TextInput} from '../components/Form/TextInput';
 import {useFormik} from 'formik';
 import {IScreenBaseProps} from '../services/interfaces/common';
 import {RadioInput} from '../components/Form/RadioInput';
-import {GenderOptions, LeadSourceOptions} from '../utils/constants';
+import {
+  CitiesOptions,
+  GenderOptions,
+  LeadSourceOptions,
+} from '../utils/constants';
 import {CheckBoxInput} from '../components/Form/CheclBoxInput';
-// import RadioInput from '../components/Form/RadioInput';
+import {StaticSelector} from '../components/Form/StaticSelector';
 
 interface SignUpScreenProps extends IScreenBaseProps {}
 
@@ -43,6 +47,7 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
       color: theme.colors.secondary,
     },
     button: {
+      marginTop: 30,
       fontSize: 30,
     },
     loginTextContainer: {
@@ -91,6 +96,12 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
           placeholder="Password"
         />
 
+        <StaticSelector
+          fieldLabel="City"
+          options={CitiesOptions}
+          isSearchable={false}
+        />
+
         <RadioInput
           fieldLabel="Select Gender"
           options={GenderOptions}
@@ -110,6 +121,7 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
         />
 
         <Button
+          style={styles.button}
           mode="contained"
           buttonColor={theme.colors.primary}
           onPress={() => formik.handleSubmit()}

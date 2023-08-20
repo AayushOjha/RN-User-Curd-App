@@ -23,7 +23,7 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="login">
+        <Stack.Navigator initialRouteName="signup">
           <Stack.Screen
             name="login"
             options={{

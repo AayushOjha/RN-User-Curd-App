@@ -12,3 +12,11 @@ export const LeadSourceOptions = {
   jobPortal: false,
   other: false,
 };
+
+// export const CitiesOptions = [
+//   {label: 'Mumbai', value: 'mumbai'},
+//   {label: 'Pune', value: 'pune'},
+//   {label: 'Ahmedabad', value: 'ahmedabad'},
+// ];
+
+export const CitiesOptions = ['Mumbai', 'Pune', 'Ahmedabad'];
