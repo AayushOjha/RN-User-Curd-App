@@ -6,6 +6,7 @@ import {TextInput} from '../components/Form/TextInput';
 import {useFormik} from 'formik';
 import {IScreenBaseProps} from '../services/interfaces/common';
 import RadioInput from '../components/Form/RadioInput';
+import {GenderOptions} from '../utils/constants';
 // import RadioInput from '../components/Form/RadioInput';
 
 interface SignUpScreenProps extends IScreenBaseProps {}
@@ -13,7 +14,10 @@ interface SignUpScreenProps extends IScreenBaseProps {}
 const SignUpScreen = ({navigation}: SignUpScreenProps) => {
   const formik = useFormik({
     initialValues: {
+      name: undefined,
       email: undefined,
+      phone: undefined,
+      gender: 'male',
       password: undefined,
     },
     onSubmit: values => {
@@ -85,7 +89,11 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
           placeholder="Password"
         />
 
-        <RadioInput />
+        <RadioInput
+          options={GenderOptions}
+          onChange={formik.handleChange('gender')}
+          currentValue={formik.values.gender}
+        />
 
         <Button
           mode="contained"
