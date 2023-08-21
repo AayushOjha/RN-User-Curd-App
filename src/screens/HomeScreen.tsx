@@ -20,7 +20,6 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
   useEffect(() => {
     getData('token').then(token => {
       if (token) {
-        console.log(token);
         setIsLoading(false);
       } else {
         navigation.reset({index: 0, routes: [{name: 'login'}]});
