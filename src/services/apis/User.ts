@@ -13,18 +13,16 @@ class User {
         data: payload,
       },
     });
+  };
 
-    // try {
-    //   const res = await axios.post(`${authEndpoint}/register`, payload);
-    //   console.log('Data added successfully', res.data);
-    // } catch (err: any) {
-    //   console.log('lala');
-    //   if (err.response) {
-    //     console.error('Error response data:', err.response.data);
-    //   } else {
-    //     console.error('Other error:', err.message);
-    //   }
-    // }
+  signIn = (payload: {email: string; password: string}) => {
+    return fetchJSON({
+      url: `${authEndpoint}/sign_in`,
+      options: {
+        method: 'POST',
+        data: payload,
+      },
+    });
   };
 }
 

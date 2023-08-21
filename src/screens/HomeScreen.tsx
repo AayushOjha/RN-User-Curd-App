@@ -14,6 +14,7 @@ type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'home'>;
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
   const [usersData, srtUsersData] = useState<IUserList>(UserList);
+  const [isLoading, setIsLoading] = useState(true);
 
   // styling
   const {width: windowWidth, height: windowHeight} = Dimensions.get('window');

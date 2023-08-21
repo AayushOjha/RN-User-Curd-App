@@ -7,5 +7,9 @@
 <!-- normal -->
 
 - make StaticSelect components dropdown align with there
-- add validation to login and signup forms
+- add validation to login and signup forms and show error message form backend
 - create a number input type
+
+<!-- Good to have  -->
+
+- instead of creating snackbar state in each component we can create a HOC and handle snackbar state with redux
