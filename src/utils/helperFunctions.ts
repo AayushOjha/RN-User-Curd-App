@@ -25,7 +25,7 @@ export function toggleStringArray(array: string[], string: string) {
 // Async Storage
 export const storeData = async (key: string, value: any) => {
   try {
-    await AsyncStorage.setItem('my-key', value);
+    await AsyncStorage.setItem(key, value);
   } catch (e) {
     // saving error
   }

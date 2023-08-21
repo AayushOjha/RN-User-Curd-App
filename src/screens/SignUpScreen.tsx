@@ -65,7 +65,6 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
     },
     button: {
       marginTop: 30,
-      marginBottom: 90,
       fontSize: 30,
     },
     loginTextContainer: {

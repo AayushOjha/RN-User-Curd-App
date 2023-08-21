@@ -35,7 +35,6 @@ const LoginScreen = ({navigation}: LoginScreenProps) => {
         user
           .signIn({email, password})
           .then(res => {
-            console.log(res.data);
             storeData('token', res.data.token)
               .then(() => {
                 navigation.navigate('home');
