@@ -1,8 +1,10 @@
+import {AxiosPromise} from 'axios';
 import {API_ENDPOINT} from '../../utils/constants';
-import {IUserRegister} from '../interfaces/common';
+import {IUserList, IUserListItem, IUserRegister} from '../interfaces/common';
 import {fetchJSON} from './index';
 
 const authEndpoint = `${API_ENDPOINT}/api/auth`;
+const customAuthEndpoint = `${API_ENDPOINT}/api/customer`;
 
 class User {
   register = (payload: IUserRegister) => {
@@ -21,6 +23,22 @@ class User {
       options: {
         method: 'POST',
         data: payload,
+      },
+    });
+  };
+
+  addContact = (
+    payload: IUserListItem,
+    token: string,
+  ): AxiosPromise<IUserList['users']> => {
+    return fetchJSON({
+      url: `${customAuthEndpoint}/add_contact`,
+      options: {
+        method: 'POST',
+        data: payload,
+        headers: {
+          Authorization: `Bearer ${token}` || '',
+        },
       },
     });
   };

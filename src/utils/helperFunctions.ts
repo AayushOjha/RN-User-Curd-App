@@ -27,7 +27,7 @@ export const storeData = async (key: string, value: any) => {
   try {
     await AsyncStorage.setItem(key, value);
   } catch (e) {
-    // saving error
+    console.error(e);
   }
 };
 
@@ -39,6 +39,6 @@ export const getData = async (key: string) => {
       return value;
     }
   } catch (e) {
-    // error reading value
+    console.error(e);
   }
 };

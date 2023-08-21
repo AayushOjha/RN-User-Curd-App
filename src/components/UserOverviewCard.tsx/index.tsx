@@ -17,9 +17,10 @@ import {IUserListItem} from '../../services/interfaces/common';
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 interface UserOverviewCardProps {
   user: IUserListItem;
+  token: string;
 }
 
-const UserOverviewCard = ({user}: UserOverviewCardProps) => {
+const UserOverviewCard = ({user, token}: UserOverviewCardProps) => {
   // styling
   // const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   const theme = useTheme();
@@ -51,7 +52,7 @@ const UserOverviewCard = ({user}: UserOverviewCardProps) => {
     <Card style={styles.container}>
       <Card.Content>
         <View style={styles.content}>
-          <Avatar.Text size={40} label={getInitials(user.name)} />
+          <Avatar.Text size={40} label={getInitials(user.name || '')} />
           <View style={styles.nameContainer}>
             <Text variant="titleSmall">{user.name}</Text>
             <Text variant="bodySmall">{`${user.email} | ${user.phone}`}</Text>
@@ -62,7 +63,7 @@ const UserOverviewCard = ({user}: UserOverviewCardProps) => {
               mode="outlined"
               size={20}
               onPress={() => {
-                navigation.navigate('userForm', user);
+                navigation.navigate('userForm', {user, token});
               }}
             />
           </View>

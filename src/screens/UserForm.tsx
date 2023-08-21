@@ -6,6 +6,9 @@ import {AppContainer} from '../components/AppContainer';
 import {TextInput} from '../components/Form/TextInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
+import {user} from '../services/apis/User';
+import {IUserListItem} from '../services/interfaces/common';
+import {storeData} from '../utils/helperFunctions';
 
 type UserFormProps = NativeStackScreenProps<RootStackParamList, 'userForm'>;
 
@@ -13,22 +16,32 @@ const UserForm = ({navigation, route}: UserFormProps) => {
   // const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   const theme = useTheme();
   const formik = useFormik({
-    initialValues: route.params
-      ? route.params
-      : {
-          name: undefined,
-          email: undefined,
-          phone: undefined,
+    initialValues: route.params?.user
+      ? route.params.user
+      : ({
+          name: '',
+          email: '',
+          phone: '',
           address: {
-            addressLine1: undefined,
-            addressLine2: undefined,
-            city: undefined,
-            pinCode: undefined,
-            state: undefined,
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            pinCode: '',
+            state: '',
           },
-        },
+        } as IUserListItem),
     onSubmit: values => {
-      console.log(values);
+      user
+        .addContact(values, route.params.token)
+        .then(res => {
+          console.log(res.data);
+          storeData('users', JSON.stringify({users: res.data})).then(res =>
+            navigation.pop(),
+          );
+        })
+        .catch(error => {
+          console.error(error.response.data);
+        });
     },
   });
 

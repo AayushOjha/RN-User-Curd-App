@@ -14,13 +14,24 @@ import {getData} from '../utils/helperFunctions';
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'home'>;
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
-  const [usersData, srtUsersData] = useState<IUserList>(UserList);
+  const [usersData, setUsersData] = useState<IUserList>({users: []});
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState<string>();
 
   useEffect(() => {
     getData('token').then(token => {
       if (token) {
-        setIsLoading(false);
+        // setIsLoading(false);
+        setToken(token);
+        // basically we should use promise all here but because of less time i am doing it this way
+        getData('users').then(users => {
+          if (users) {
+            setUsersData(JSON.parse(users));
+          } else {
+            setUsersData({users: []});
+          }
+          setIsLoading(false);
+        });
       } else {
         navigation.reset({index: 0, routes: [{name: 'login'}]});
       }
@@ -71,14 +82,10 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
               ItemSeparatorComponent={() => (
                 <View style={styles.listSeparator} />
               )}
-              renderItem={({item}) => <UserOverviewCard user={{...item}} />}
+              renderItem={({item}) => (
+                <UserOverviewCard user={{...item}} token={token || ''} />
+              )}
               keyExtractor={item => item.phone}
-            />
-            <FAB
-              icon="plus"
-              color="#fff"
-              style={styles.fab}
-              onPress={() => navigation.navigate('userForm')}
             />
           </SafeAreaView>
         ) : (
@@ -87,9 +94,17 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
               source={require('../assets/no-data.png')}
               style={styles.noDataImage}
             />
-            <Text variant="titleMedium">No User found, Please add one.</Text>
+            <Text variant="titleMedium" style={{textAlign: 'center'}}>
+              No User found, Please add one.
+            </Text>
           </>
         )}
+        <FAB
+          icon="plus"
+          color="#fff"
+          style={styles.fab}
+          onPress={() => navigation.navigate('userForm', {token: token || ''})}
+        />
       </View>
     );
   }

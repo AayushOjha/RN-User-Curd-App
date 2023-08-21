@@ -49,10 +49,10 @@ const fetchJSON = ({
 
   let axiosOptions = {
     ...options,
-    headers: {
-      Authorization: `Bearer ${accessToken}` || '',
-      locale: locale || 'en',
-    },
+    // headers: {
+    //   Authorization: `Bearer ${accessToken}` || '',
+    //   locale: locale || 'en',
+    // },
     withCredentials: true,
   };
 

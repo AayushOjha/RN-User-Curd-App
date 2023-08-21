@@ -18,7 +18,7 @@ export type RootStackParamList = {
   login: undefined;
   signup: undefined;
   home: undefined;
-  userForm: IUserListItem | undefined;
+  userForm: {user?: IUserListItem; token: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
