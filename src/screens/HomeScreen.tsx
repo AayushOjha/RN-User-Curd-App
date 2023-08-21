@@ -1,9 +1,8 @@
-import {Animated, Dimensions, Image, StyleSheet, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
 import {ActivityIndicator, FAB, Text, useTheme} from 'react-native-paper';
-import {UserList} from '../utils/constants';
 import {IUserList} from '../services/interfaces/common';
 import {get, isEmpty} from 'lodash';
 import {FlatList} from 'react-native-gesture-handler';
@@ -85,7 +84,7 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
               renderItem={({item}) => (
                 <UserOverviewCard user={{...item}} token={token || ''} />
               )}
-              keyExtractor={item => item.phone}
+              keyExtractor={item => `${item.phone}+${item.name}`}
             />
           </SafeAreaView>
         ) : (

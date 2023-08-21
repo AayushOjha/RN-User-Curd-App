@@ -1,7 +1,6 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
   Dimensions,
@@ -12,7 +11,7 @@ import {
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {useTheme} from 'react-native-paper';
+import {Text, useTheme} from 'react-native-paper';
 
 type Props = {
   title: string;
@@ -78,7 +77,20 @@ const ScreenHeader = ({title, disableMenu}: Props) => {
     },
   });
 
-  const [menu, setMenu] = useState<IMenu[]>([]);
+  const [menu, setMenu] = useState<IMenu[]>([
+    {
+      menu_name: 'LinkedIn',
+      menu_link: 'https://www.linkedin.com/in/ayush-ojha-a074991ab/',
+    },
+    {
+      menu_name: 'Github',
+      menu_link: 'https://github.com/AayushOjha',
+    },
+    {
+      menu_name: 'Portfolio',
+      menu_link: 'https://aayushojha.github.io/Portfolio.2.0',
+    },
+  ]);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
 
   // useEffect(() => {

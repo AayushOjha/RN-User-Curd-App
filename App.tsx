@@ -71,14 +71,14 @@ export default function App() {
               <Stack.Screen
                 name="home"
                 options={{
-                  header: () => <ScreenHeader title="Home" />,
+                  header: () => <ScreenHeader title="Home" disableMenu />,
                 }}
                 component={HomeScreen}
               />
               <Stack.Screen
                 name="userForm"
                 options={{
-                  header: () => <ScreenHeader title="User" />,
+                  header: () => <ScreenHeader title="User" disableMenu />,
                 }}
                 component={UserForm}
               />

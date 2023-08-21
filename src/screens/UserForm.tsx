@@ -31,17 +31,31 @@ const UserForm = ({navigation, route}: UserFormProps) => {
           },
         } as IUserListItem),
     onSubmit: values => {
-      user
-        .addContact(values, route.params.token)
-        .then(res => {
-          console.log(res.data);
-          storeData('users', JSON.stringify({users: res.data})).then(res =>
-            navigation.pop(),
-          );
-        })
-        .catch(error => {
-          console.error(error.response.data);
-        });
+      if (route.params?.user) {
+        user
+          .updateContact(values, route.params.token, route.params.user._id)
+          .then(res => {
+            console.log(res.data);
+            storeData('users', JSON.stringify({users: res.data})).then(res =>
+              navigation.pop(),
+            );
+          })
+          .catch(error => {
+            console.error(error.response.data);
+          });
+      } else {
+        user
+          .addContact(values, route.params.token)
+          .then(res => {
+            console.log(res.data);
+            storeData('users', JSON.stringify({users: res.data})).then(res =>
+              navigation.pop(),
+            );
+          })
+          .catch(error => {
+            console.error(error.response.data);
+          });
+      }
     },
   });
 

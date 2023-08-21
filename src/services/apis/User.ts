@@ -42,6 +42,23 @@ class User {
       },
     });
   };
+
+  updateContact = (
+    payload: IUserListItem,
+    token: string,
+    id: string,
+  ): AxiosPromise<IUserList['users']> => {
+    return fetchJSON({
+      url: `${customAuthEndpoint}/update_contact/${id}`,
+      options: {
+        method: 'PUT',
+        data: payload,
+        headers: {
+          Authorization: `Bearer ${token}` || '',
+        },
+      },
+    });
+  };
 }
 
 const user = new User();
