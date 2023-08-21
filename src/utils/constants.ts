@@ -1,4 +1,8 @@
-import {IOprionsObject, IUserList} from '../services/interfaces/common';
+import {
+  IOprionsObject,
+  IUserList,
+  IUserRegister,
+} from '../services/interfaces/common';
 
 export const GenderOptions: IOprionsObject[] = [
   {value: 'male', label: 'Male'},
@@ -7,21 +11,20 @@ export const GenderOptions: IOprionsObject[] = [
 ];
 
 export const LeadSourceOptions = {
-  linkedIn: false,
-  friends: false,
-  jobPortal: false,
+  linkedin: false,
+  friend: false,
+  job_portal: false,
   other: false,
 };
-
-// export const CitiesOptions = [
-//   {label: 'Mumbai', value: 'mumbai'},
-//   {label: 'Pune', value: 'pune'},
-//   {label: 'Ahmedabad', value: 'ahmedabad'},
-// ];
 
 export const CitiesOptions = ['Mumbai', 'Pune', 'Ahmedabad'];
 
 export const StateOptions = ['Gujarat', 'Maharashtra', 'Karnataka'];
+
+export const InitialUserData: IUserRegister = {
+  gender: 'male',
+  leadSource: [],
+};
 
 // Mocking the data
 export const UserList: IUserList = {
@@ -47,3 +50,5 @@ export const UserList: IUserList = {
     },
   ],
 };
+
+export const API_ENDPOINT = 'https://user-app-backend.vercel.app/';

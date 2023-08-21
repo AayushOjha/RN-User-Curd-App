@@ -36,7 +36,7 @@ export default function App() {
     <GestureHandlerRootView style={{flex: 1}}>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="home">
+          <Stack.Navigator initialRouteName="login">
             <Stack.Screen
               name="login"
               options={{

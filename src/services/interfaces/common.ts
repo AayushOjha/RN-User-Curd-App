@@ -3,6 +3,8 @@ export interface IOprionsObject {
   label: string;
 }
 
+export type TGenders = 'male' | 'female' | 'other';
+
 // Form Input interfaces
 export interface IRadioInputProps {
   options: IOprionsObject[];
@@ -24,3 +26,23 @@ export interface IUserListItem {
 export interface IUserList {
   users: IUserListItem[];
 }
+
+export interface IUserRegister {
+  name?: string;
+  email?: string;
+  phone?: string;
+  gender: TGenders;
+  leadSource: string[];
+  password?: string;
+  city?: string;
+  state?: string;
+}
+
+export type TSnackBarProps = {
+  message: string;
+  duration?: number;
+  action?: {
+    label: string;
+    onPress: () => void;
+  };
+} | null;

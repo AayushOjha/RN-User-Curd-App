@@ -5,9 +5,9 @@ import {includes, startCase} from 'lodash';
 
 interface CheckBoxInputProps {
   fieldLabel: string;
-  // options: Record<string, boolean>;
-  onChange: (key: string, value: boolean) => void;
-  currentValue: Record<string, boolean>;
+  options: Record<string, boolean>;
+  onChange: (key: string) => void;
+  currentValue: string[];
 }
 
 const styles = StyleSheet.create({
@@ -27,18 +27,19 @@ const CheckBoxInput = ({
   onChange,
   currentValue,
   fieldLabel,
+  options,
 }: CheckBoxInputProps) => {
   return (
     <View>
       <Text variant="titleMedium">{fieldLabel}</Text>
       <View style={styles.radioItemContainer}>
-        {Object.keys(currentValue).map(item => (
+        {Object.keys(options).map(item => (
           <Checkbox.Item
             key={item}
             label={startCase(item)}
-            status={currentValue[item] ? 'checked' : 'unchecked'}
+            status={includes(currentValue, item) ? 'checked' : 'unchecked'}
             onPress={() => {
-              onChange(item, !currentValue[item]);
+              onChange(item);
             }}
             position="leading"
             style={styles.item}
