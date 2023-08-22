@@ -35,7 +35,6 @@ const UserForm = ({navigation, route}: UserFormProps) => {
         user
           .updateContact(values, route.params.token, route.params.user._id)
           .then(res => {
-            console.log(res.data);
             storeData('users', JSON.stringify({users: res.data})).then(res =>
               navigation.pop(),
             );
@@ -47,7 +46,6 @@ const UserForm = ({navigation, route}: UserFormProps) => {
         user
           .addContact(values, route.params.token)
           .then(res => {
-            console.log(res.data);
             storeData('users', JSON.stringify({users: res.data})).then(res =>
               navigation.pop(),
             );

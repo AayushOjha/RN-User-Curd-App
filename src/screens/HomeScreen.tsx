@@ -4,11 +4,12 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
 import {ActivityIndicator, FAB, Text, useTheme} from 'react-native-paper';
 import {IUserList} from '../services/interfaces/common';
-import {get, isEmpty} from 'lodash';
+import {isEmpty} from 'lodash';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {UserOverviewCard} from '../components/UserOverviewCard.tsx';
 import {getData} from '../utils/helperFunctions';
+import {useFocusEffect} from '@react-navigation/native';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'home'>;
 
@@ -17,25 +18,30 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState<string>();
 
-  useEffect(() => {
-    getData('token').then(token => {
-      if (token) {
-        // setIsLoading(false);
-        setToken(token);
-        // basically we should use promise all here but because of less time i am doing it this way
-        getData('users').then(users => {
-          if (users) {
-            setUsersData(JSON.parse(users));
-          } else {
-            setUsersData({users: []});
-          }
-          setIsLoading(false);
-        });
-      } else {
-        navigation.reset({index: 0, routes: [{name: 'login'}]});
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getData('token').then(token => {
+        if (token) {
+          // setIsLoading(false);
+          setToken(token);
+          // basically we should use promise all here but because of less time i am doing it this way
+          getData('users').then(users => {
+            if (users) {
+              setUsersData(JSON.parse(users));
+            } else {
+              setUsersData({users: []});
+            }
+            setIsLoading(false);
+          });
+        } else {
+          navigation.reset({index: 0, routes: [{name: 'login'}]});
+        }
+      });
+    }, []),
+  );
 
   // styling
   const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
