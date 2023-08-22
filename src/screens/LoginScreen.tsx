@@ -20,8 +20,12 @@ interface formState {
 
 const initialValue: formState = {};
 
-const LoginScreen = ({navigation}: LoginScreenProps) => {
-  const [snackBar, setSnackBar] = useState<TSnackBarProps>(null);
+const LoginScreen = ({navigation, route}: LoginScreenProps) => {
+  const [snackBar, setSnackBar] = useState<TSnackBarProps>(
+    route.params?.snackBarMessage
+      ? {message: route.params.snackBarMessage, duration: 4000}
+      : null,
+  );
   const [isLoading, setIsLoading] = useState(false);
 
   // style
@@ -43,8 +47,11 @@ const LoginScreen = ({navigation}: LoginScreenProps) => {
                 console.log('enable to store token in local storage'),
               );
           })
-          .catch((err: AxiosError) => {
-            console.log(err.response?.data);
+          .catch(err => {
+            setSnackBar({
+              message: JSON.stringify(err.response.data.message),
+              action: {label: 'Ok', onPress: () => setSnackBar(null)},
+            });
           })
           .finally(() => setIsLoading(false));
       } else {

@@ -15,7 +15,7 @@ import {getData} from './src/utils/helperFunctions';
 import {View} from 'react-native';
 
 export type RootStackParamList = {
-  login: undefined;
+  login: undefined | {snackBarMessage: string};
   signup: undefined;
   home: undefined;
   userForm: {user?: IUserListItem; token: string};
@@ -42,6 +42,9 @@ export default function App() {
     getData('token').then(token => {
       if (token) {
         setInitialScree('home');
+        setIsLoading(false);
+      } else {
+        setInitialScree('login');
         setIsLoading(false);
       }
     });

@@ -24,26 +24,28 @@ import {TSnackBarProps} from '../services/interfaces/common';
 type SignUpScreenProps = NativeStackScreenProps<RootStackParamList, 'signup'>;
 
 const SignUpScreen = ({navigation}: SignUpScreenProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: InitialUserData,
     onSubmit: values => {
+      setIsLoading(true);
       user
         .register(values)
         .then(res => {
-          setSnackBar({
-            message: 'User created successfully!',
-            action: {
-              label: 'Ok',
-              onPress: () => {
-                setSnackBar(null);
-              },
-            },
+          navigation.replace('login', {
+            snackBarMessage:
+              'User created successfully, please Login to Continue',
           });
-          navigation.replace('home');
         })
         .catch(err => {
           console.log(err.response.data);
-        });
+          setSnackBar({
+            message: JSON.stringify(err.response.data.error),
+            action: {label: 'Ok', onPress: () => setSnackBar(null)},
+          });
+        })
+        .finally(() => setIsLoading(false));
     },
   });
 
@@ -149,6 +151,7 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
           />
 
           <Button
+            loading={isLoading}
             style={styles.button}
             mode="contained"
             buttonColor={theme.colors.primary}
