@@ -18,9 +18,6 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState<string>();
 
-  // useEffect(() => {
-  // }, []);
-
   useFocusEffect(
     React.useCallback(() => {
       getData('token').then(token => {

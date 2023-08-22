@@ -8,7 +8,9 @@ import {RootStackParamList} from '../../App';
 import {user} from '../services/apis/User';
 import {IUserListItem, TSnackBarProps} from '../services/interfaces/common';
 import {storeData} from '../utils/helperFunctions';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import NetInfo from '@react-native-community/netinfo';
 
 type UserFormProps = NativeStackScreenProps<RootStackParamList, 'userForm'>;
 
@@ -68,6 +70,28 @@ const UserForm = ({navigation, route}: UserFormProps) => {
       }
     },
   });
+
+  useFocusEffect(
+    useCallback(() => {
+      NetInfo.fetch().then(state => {
+        if (!state.isConnected) {
+          const timeout = setTimeout(() => {
+            navigation.pop();
+          }, 5000);
+          setSnackBar({
+            message: JSON.stringify('Please Connect to Internet'),
+            action: {
+              label: 'Ok',
+              onPress: () => {
+                clearTimeout(timeout);
+                navigation.pop();
+              },
+            },
+          });
+        }
+      });
+    }, []),
+  );
 
   const styles = StyleSheet.create({
     form: {
