@@ -41,7 +41,8 @@ const LoginScreen = ({navigation, route}: LoginScreenProps) => {
           .then(res => {
             storeData('token', res.data.token)
               .then(() => {
-                navigation.navigate('home');
+                // navigation.navigate('home');
+                navigation.reset({index: 0, routes: [{name: 'home'}]});
               })
               .catch(err =>
                 console.log('enable to store token in local storage'),
