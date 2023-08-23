@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
 import {ActivityIndicator, FAB, Text, useTheme} from 'react-native-paper';
-import {IUserList} from '../services/interfaces/common';
+import {IUserList, TSnackBarProps} from '../services/interfaces/common';
 import {isEmpty} from 'lodash';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -17,6 +17,7 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
   const [usersData, setUsersData] = useState<IUserList>({users: []});
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState<string>();
+  const [snackBar, setSnackBar] = useState<TSnackBarProps>(null);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -85,7 +86,11 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
                 <View style={styles.listSeparator} />
               )}
               renderItem={({item}) => (
-                <UserOverviewCard user={{...item}} token={token || ''} />
+                <UserOverviewCard
+                  user={{...item}}
+                  token={token || ''}
+                  showNoInternet={() => {}}
+                />
               )}
               keyExtractor={item => `${item.phone}+${item.name}`}
             />

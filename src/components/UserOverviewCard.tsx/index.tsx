@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Avatar,
   Button,
@@ -8,19 +8,26 @@ import {
   Text,
   useTheme,
 } from 'react-native-paper';
-import {getInitials} from '../../utils/helperFunctions';
+import {getInitials, storeData} from '../../utils/helperFunctions';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../App';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {IUserListItem} from '../../services/interfaces/common';
+import {user as User} from '../../services/apis/User';
+import NetInfo from '@react-native-community/netinfo';
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 interface UserOverviewCardProps {
   user: IUserListItem;
   token: string;
+  showNoInternet: () => void;
 }
 
-const UserOverviewCard = ({user, token}: UserOverviewCardProps) => {
+const UserOverviewCard = ({
+  user,
+  token,
+  showNoInternet,
+}: UserOverviewCardProps) => {
   // styling
   // const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   const theme = useTheme();
@@ -41,11 +48,24 @@ const UserOverviewCard = ({user, token}: UserOverviewCardProps) => {
     editButtonContainer: {
       width: 'auto',
       display: 'flex',
+      flexDirection: 'row',
       justifyContent: 'flex-end',
       alignItems: 'flex-end',
       alignSelf: 'flex-end',
     },
   });
+
+  const onDelete = () => {
+    NetInfo.fetch().then(state => {
+      if (!state.isConnected) {
+        showNoInternet();
+      } else {
+        User.deleteContact(token, user._id).then(res => {
+          storeData('users', JSON.stringify({users: res.data})).then(res => {});
+        });
+      }
+    });
+  };
 
   const navigation = useNavigation<NavigationProps>();
   return (
@@ -61,9 +81,17 @@ const UserOverviewCard = ({user, token}: UserOverviewCardProps) => {
             <IconButton
               icon="account-edit"
               mode="outlined"
-              size={20}
+              size={18}
               onPress={() => {
                 navigation.navigate('userForm', {user, token});
+              }}
+            />
+            <IconButton
+              icon="delete"
+              mode="outlined"
+              size={18}
+              onPress={() => {
+                // navigation.navigate('userForm', {user, token});
               }}
             />
           </View>

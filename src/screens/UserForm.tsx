@@ -152,7 +152,7 @@ const UserForm = ({navigation, route}: UserFormProps) => {
             onChange={formik.handleChange('address.addressLine1')}
             handleBlur={formik.handleBlur}
             value={formik.values.address?.['addressLine1']}
-            placeholder="Address Line 1"
+            placeholder="Address Line 1 *"
           />
 
           <TextInput
@@ -168,7 +168,7 @@ const UserForm = ({navigation, route}: UserFormProps) => {
             onChange={formik.handleChange('address.city')}
             handleBlur={formik.handleBlur}
             value={formik.values.address?.['city']}
-            placeholder="City"
+            placeholder="City *"
           />
 
           <TextInput
@@ -176,7 +176,7 @@ const UserForm = ({navigation, route}: UserFormProps) => {
             onChange={formik.handleChange('address.pinCode')}
             handleBlur={formik.handleBlur}
             value={formik.values.address?.['pinCode'] || undefined}
-            placeholder="pinCode"
+            placeholder="pinCode *"
           />
 
           <TextInput
@@ -184,7 +184,7 @@ const UserForm = ({navigation, route}: UserFormProps) => {
             onChange={formik.handleChange('address.state')}
             handleBlur={formik.handleBlur}
             value={formik.values.address?.['state']}
-            placeholder="State"
+            placeholder="State *"
           />
 
           <View style={styles.buttonContainer}>

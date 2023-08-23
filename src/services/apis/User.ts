@@ -59,6 +59,21 @@ class User {
       },
     });
   };
+
+  deleteContact = (
+    token: string,
+    id: string,
+  ): AxiosPromise<IUserList['users']> => {
+    return fetchJSON({
+      url: `${customAuthEndpoint}/delete_contact/${id}`,
+      options: {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}` || '',
+        },
+      },
+    });
+  };
 }
 
 const user = new User();
